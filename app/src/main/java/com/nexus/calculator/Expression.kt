@@ -26,7 +26,6 @@ class Expression {
                 } catch (ex: InvalidExpression) {
 
                 }
-
             }
             return
         }
@@ -54,12 +53,12 @@ class Expression {
             return
         }
 
-        if (last?.value == '(' && !(value.value == '-' || value.value == '(')) {
+        if (last?.value == '(' && !(value.value == '-' || value.value == '(' || value.isNumber)) {
             last = value
             return
         }
 
-        if (type != NumberType.number && ((last == null && (value.value == '*' || value.value == '\\')) || (last?.value == '.'))) {
+        if (type != NumberType.number && ((last == null && (value.value == '*' || value.value == '/')) || (last?.value == '.'))) {
             return
         }
 

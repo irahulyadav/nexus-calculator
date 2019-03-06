@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class NumberAdapter(val recyclerListener: RecyclerViewListener) : RecyclerView.Adapter<NumberHolder>() {
     private val list = arrayListOf(
-        arrayListOf('9', '8', '7', '\\'),
+        arrayListOf('9', '8', '7', '/'),
         arrayListOf('6', '5', '4', '+'),
         arrayListOf('3', '2', '1', '-'),
         arrayListOf('C', '0', '.', '*'),
@@ -29,15 +29,30 @@ class NumberAdapter(val recyclerListener: RecyclerViewListener) : RecyclerView.A
         return Pair(position / 4, position % 4)
     }
 
+    public fun getPosition(char: Char): Int {
+        if (char != ' ') {
+            var i = 0
+            list.forEach {
+                it.forEach {
+                    if (char == it) {
+                        return i
+                    }
+                    i++
+                }
+            }
+        }
+        return -1
+    }
+
     fun getItem(position: Int): NumberItem {
         val pair = getPosition(position)
         return NumberItem(list[pair.first][pair.second])
     }
 
-    fun getSpanSize(position: Int): Int {
-        val pair = getPosition(position)
-        return list[pair.first].size
-    }
+//    fun getSpanSize(position: Int): Int {
+//        val pair = getPosition(position)
+//        return list[pair.first].size
+//    }
 
     override fun onBindViewHolder(holder: NumberHolder, position: Int) {
         holder.item = getItem(position)
@@ -91,7 +106,7 @@ class NumberItem(val value: Char) {
         get() = value in '0'..'9'
 
     val isOperation: Boolean
-        get() = value == '*' || value == '\\' || value == '-' || value == '+'
+        get() = value == '*' || value == '/' || value == '-' || value == '+'
 
     val isClean: Boolean
         get() = value == 'C'
