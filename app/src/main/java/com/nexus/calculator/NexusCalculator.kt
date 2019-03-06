@@ -10,7 +10,6 @@ class NexusCalculator {
             return !(char in arrayListOf('+', '-', '*', '/', '(', ')'))
         }
 
-
         fun evaluate(expression: String): Double {
             val inputes = expression.toCharArray()
             val values = Stack<Double>()

@@ -4,6 +4,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class NexusCalculatorUnitTest {
+
     val list = arrayListOf(
         "4 + 3 + 4",
         "3-2",
